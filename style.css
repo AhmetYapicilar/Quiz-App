@@ -23,6 +23,49 @@ body{
     position: relative;
 }
 
+.column{
+    display: flex;
+    flex-direction: column;
+}
+
+.space-between{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.absolute-left-0{
+    position: absolute;
+    left: 0;
+}
+
+.fixed-width{
+    width: 56px;
+}
+
+.margin-top{
+    margin-top: 32px;
+}
+
+.vertical-line{
+    width: 2px;
+    height: 16px;
+    background-color: white;
+}
+
+.display-none{
+    display: none;
+}
+
+.subject{
+    color: rgb(174,185,213);
+}
+
+.margin-bottom-8{
+    margin-bottom: 8px;
+}
+
+
 nav{
     font-family: "Rubik", sans-serif;
     height: 400px;
@@ -62,10 +105,34 @@ nav{
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    position: relative;
 }
 
 .font-family-ptsans{
     font-family: "PT Sans", sans-serif;
+    text-align: center;
+}
+
+.background-image-brain{
+    background-image: url(./img/brainbg.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+.start-button{
+    background-color: rgb(254,79,16);
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: none;
+    height: 32px;
+    width: 150px;
+    border-radius: 8px;
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+    cursor: pointer;
 }
 
 .questions{
@@ -87,6 +154,7 @@ h3{
     align-items: center;
     margin-bottom: 12px;
     width: 350px;
+    cursor: pointer;
 }
 
 .letter{
@@ -99,6 +167,22 @@ h3{
     margin-right: 16px;
     font-weight: 400;
     font-style: normal;
+}
+
+.rightLetter{
+    background-color: rgb(78,191,25);
+}
+
+.rightAnswer{
+    background-color: rgb(183,247,153);
+}
+
+.falseLetter{
+    background-color: rgb(247,24,27);
+}
+
+.falseAnswer{
+    background-color: rgb(255,163,164);
 }
 
 span{
