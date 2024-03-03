@@ -203,5 +203,70 @@ span{
 .icon{
     width: 32px;
     height: 32px;
+    pointer-events: none;
+}
+
+.icon-previous{
+    width: 32px;
+    height: 32px;
     cursor: pointer;
 }
+
+.clickable{
+    cursor: pointer;
+    pointer-events: visible;
+}
+
+/* Anfang Endscreen */
+
+.end-screen{
+    background-color: rgb(247,247,247);
+    flex: 1;
+    height: 400px;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.end-brain{
+    width: 80px;
+    height: 80px;
+    margin-top: 24px;
+    margin-bottom: 16px;
+}
+
+.column-endscreen{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.end-score{
+    color: rgb(233,135,62);
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.fixed-width-200{
+    width: 200px;
+    margin-top: 32px;
+}
+
+.replay-button{
+    color: rgb(43,67,177);
+    border: none;
+    background-color: rgb(247,247,247);
+    margin-top: 48px;
+    cursor: pointer;
+}
+
+.tropy{
+    width: 30vw;
+    height: 70vh;
+    position: absolute;
+    right: 0;
+    top: 20vh;
+}
+

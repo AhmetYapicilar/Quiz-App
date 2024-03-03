@@ -57,9 +57,13 @@ let questions = [
   },
 ];
 
+let rightQuestions = 0;
+
 function init() {
   let content = document.getElementById("content");
   content.innerHTML = "";
+  document.getElementById('tropy').classList.add('display-none');
+  rightQuestions = 0;
   content.innerHTML = initHTML();
 }
 
@@ -116,8 +120,8 @@ function startQuiz(i) {
   let content = document.getElementById("content");
   content.innerHTML = "";
   content.innerHTML = quizHTML(i);
-  document.getElementById(`line${i}`).classList.remove('display-none');
-  document.getElementById(`subject${i}`).classList.add('color-white');
+  document.getElementById(`line${i}`).classList.remove("display-none");
+  document.getElementById(`subject${i}`).classList.add("color-white");
 }
 
 function quizHTML(i) {
@@ -180,33 +184,99 @@ function quizHTML(i) {
             </div>
         </div>
         <div class="arrows">
-            <img onclick="previousQuestion(${i})" class="icon" src="./img/8666655_arrow_left_circle_icon.png">
-            <img onclick="nextQuestion(${i})" class="icon" src="./img/8666670_arrow_right_circle_icon.png">
+            <img id="previous-button" onclick="previousQuestion(${i})" class="icon-previous" src="./img/8666655_arrow_left_circle_icon.png">
+            <img id="next-button" class="icon" onclick="nextQuestion(${i})" src="./img/8666670_arrow_right_circle_icon.png">
         </div>`;
 }
 
-function nextQuestion(i){
-   i++;
-   startQuiz(i); 
+function nextQuestion(i) {
+    i++;
+if(i < questions.length){
+  startQuiz(i);
+}
+else{
+    endScreen();
+}
 }
 
-function previousQuestion(i){
-    if(i == 0){
-        startQuiz(0);
-    }
-    else{
+function previousQuestion(i) {
+  if (i == 0) {
+    startQuiz(0);
+  } else {
     i--;
     startQuiz(i);
-    }
+  }
 }
 
-function answer(i, x){
-    if (x == questions[i]['right-answer']){
-        document.getElementById(`letter${x}`).classList.add('rightLetter');
-        document.getElementById(`answer${x}`).classList.add('rightAnswer');
-    }
-    else{
-        document.getElementById(`letter${x}`).classList.add('falseLetter');
-        document.getElementById(`answer${x}`).classList.add('falseAnswer');
-    }
+function answer(i, x) {
+  if (x == questions[i]["right-answer"]) {
+    document.getElementById(`letter${x}`).classList.add("rightLetter");
+    document.getElementById(`answer${x}`).classList.add("rightAnswer");
+    rightQuestions++;
+  } else {
+    document.getElementById(`letter${x}`).classList.add("falseLetter");
+    document.getElementById(`answer${x}`).classList.add("falseAnswer");
+    rightQuestions--;
+    let y = questions[i]["right-answer"];
+    answer(i, y);
+  }
+  document.getElementById("next-button").classList.add("clickable");
+}
+
+function endScreen() {
+    document.getElementById('content').innerHTML = '';
+  document.getElementById('content').innerHTML = endScreenHTML();
+  document.getElementById('tropy').classList.remove('display-none');
+  document.getElementById('score').innerHTML = rightQuestions;
+  document.getElementById('lengthOfQuestions').innerHTML = questions.length;
+}
+
+function endScreenHTML() {
+  return `<nav class="bg-blue padding-8 column">
+    <a href="index.html">
+        <img src="./img/logo.png" alt="Logo" width="80" height="80" class="d-inline-block align-text-top">
+    </a>
+    <div class="column margin-top">
+        <div class="space-between fixed-width margin-bottom-8">
+            <div class="vertical-line display-none"></div>
+            <span class="subject">HTML</span>
+        </div>
+        <div class="space-between fixed-width margin-bottom-8">
+            <div class="vertical-line display-none"></div>
+            <span class="subject">HTML</span>
+        </div>
+        <div class="space-between fixed-width margin-bottom-8">
+            <div class="vertical-line display-none"></div>
+            <span class="subject">HTML</span>
+        </div>
+        <div class="space-between fixed-width margin-bottom-8">
+            <div class="vertical-line display-none"></div>
+            <span class="subject">JS</span>
+        </div>
+        <div class="space-between fixed-width margin-bottom-8">
+            <div class="vertical-line display-none"></div>
+            <span class="subject">CSS</span>
+        </div>
+        <div class="space-between fixed-width margin-bottom-8">
+            <div class="vertical-line display-none"></div>
+            <span class="subject">Git</span>
+        </div>
+        <div class="space-between fixed-width margin-bottom-8">
+            <div class="vertical-line display-none"></div>
+            <span class="subject">Git</span>
+        </div>
+    </div>
+</nav>
+<div class="end-screen padding-8">
+    <div class="column-endscreen">
+        <img class="end-brain" src="./img/brain result.png">
+        <span><b>Complete <br> HTML Quiz</b></span>
+        <div class="fixed-width-200 space-between">
+            <span class="end-score">Your Score</span>
+            <p><b id="score"></b><b>/</b><b id="lengthOfQuestions"></b></p>
+        </div>
+        <button onclick="init()" class="replay-button">REPLAY</button>
+    </div>
+        
+</div>`;
 }
