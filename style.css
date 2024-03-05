@@ -16,6 +16,12 @@ body{
     height: 16px;
 }
 
+#file{
+    background-color: rgb(39,53,90);
+    height: 16px;
+    transition: 1s ease;
+}
+
 .card{
     display: flex;
     width: 600px;

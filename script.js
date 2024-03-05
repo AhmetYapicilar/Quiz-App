@@ -58,10 +58,14 @@ let questions = [
 ];
 
 let rightQuestions = 0;
+let audioSuccess = new Audio('./audio/right-audio.mp3');
+let audioFalse = new Audio('./audio/false-audio.mp3');
 
 function init() {
   let content = document.getElementById("content");
   content.innerHTML = "";
+  document.getElementById('file').innerHTML = '';
+  document.getElementById('file').style.width = 0;
   document.getElementById('tropy').classList.add('display-none');
   rightQuestions = 0;
   content.innerHTML = initHTML();
@@ -210,17 +214,35 @@ function previousQuestion(i) {
 
 function answer(i, x) {
   if (x == questions[i]["right-answer"]) {
-    document.getElementById(`letter${x}`).classList.add("rightLetter");
-    document.getElementById(`answer${x}`).classList.add("rightAnswer");
-    rightQuestions++;
+    rightAnswer(x);
   } else {
-    document.getElementById(`letter${x}`).classList.add("falseLetter");
-    document.getElementById(`answer${x}`).classList.add("falseAnswer");
-    rightQuestions--;
-    let y = questions[i]["right-answer"];
-    answer(i, y);
+    falseAnswer(x, i);
   }
   document.getElementById("next-button").classList.add("clickable");
+  updateProgressBar(i);
+}
+
+function rightAnswer(x){
+    document.getElementById(`letter${x}`).classList.add("rightLetter");
+    document.getElementById(`answer${x}`).classList.add("rightAnswer");
+    audioSuccess.play();
+    rightQuestions++;
+}
+
+function falseAnswer(x, i){
+    document.getElementById(`letter${x}`).classList.add("falseLetter");
+    document.getElementById(`answer${x}`).classList.add("falseAnswer");
+    audioFalse.play();
+    let y = questions[i]["right-answer"];
+    document.getElementById(`letter${y}`).classList.add("rightLetter");
+    document.getElementById(`answer${y}`).classList.add("rightAnswer");
+}
+
+function updateProgressBar(i){
+    let percent = (i+1) / questions.length;
+  percent = Math.round(percent * 100);
+  document.getElementById('file').innerHTML = `${percent}%`;
+  document.getElementById('file').style.width = `${percent}%`;
 }
 
 function endScreen() {
